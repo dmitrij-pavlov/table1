@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>Интерактивные таблицы</title>
+  <style>
+	img {
+		width: 48px;
+		height: 48px;
+	}
+  </style>
+ </head>
+ <body>  
+  <table width="100%" border="1" cellspacing="0" cellpadding="4">
+   <caption>ВТранспорт</caption>  
+   <tr> 
+    <th>&nbsp;</th><th>Чебурашка</th>
+    <th>Крокодил Гена</th><th>Шапокляк</th>
+   </tr>
+   <tr> 
+    <td>воздух</td>
+	<td><span class="dynamic"><img src="5.png"><img src="6.png"><img src="7.png"><img src="8.png"></span></td>
+	<td><span class="dynamic"><img src="5.png"><img src="6.png"><img src="7.png"><img src="8.png"></span></td>
+	<td><span class="dynamic"><img src="5.png"><img src="6.png"><img src="7.png"><img src="8.png"></span></td>
+   </tr>
+   <tr> 
+    <td>воздух</td>
+	<td><span class="dynamic"><img src="5.png"><img src="6.png"><img src="7.png"><img src="8.png"></span></td>
+	<td><span class="dynamic"><img src="5.png"><img src="6.png"><img src="7.png"><img src="8.png"></span></td>
+	<td><span class="dynamic"><img src="5.png"><img src="6.png"><img src="7.png"><img src="8.png"></span></td>
+   </tr>
+   <tr> 
+    <td>воздух</td>
+	<td><span class="dynamic"><img src="5.png"><img src="6.png"><img src="7.png"><img src="8.png"></span></td>
+	<td><span class="dynamic"><img src="5.png"><img src="6.png"><img src="7.png"><img src="8.png"></span></td>
+	<td><span class="dynamic"><img src="5.png"><img src="6.png"><img src="7.png"><img src="8.png"></span></td>
+   </tr>
+  </table>
+ </body>
+</html>
+
+
+
+
+<script>
+
+var elems = document.getElementsByClassName("dynamic"),
+ trampInput = document.createElement("input");
+ istdselect = false;
+            trampInput.type = "text";
+            trampInput.style.width = "128px";
+            trampInput.addEventListener("blur", function() {
+				let innerText = trampInput.value;
+				innerText = innerText.replace( /С/gi, "<img src=\"5.png\">" );
+				innerText = innerText.replace( /В/gi, "<img src=\"6.png\">" );
+				innerText = innerText.replace( /Д/gi, "<img src=\"7.png\">" );	
+				innerText = innerText.replace( /Ш/gi, "<img src=\"8.png\">" );				
+				trampInput.parentNode.innerHTML = innerText;
+				istdselect = false;	
+			}
+            , false);
+for (var i=0; i<elems.length; i++) {
+    var el = elems[i];
+    el.addEventListener("click", function() {
+        if (istdselect) return;
+		istdselect = true;
+		let innerText = this.innerHTML;
+		innerText = innerText.replace( /<img src=\"5.png\">/gi, "С" );
+		innerText = innerText.replace( /<img src=\"6.png\">/gi, "В" );
+		innerText = innerText.replace( /<img src=\"7.png\">/gi, "Д" );	
+		innerText = innerText.replace( /<img src=\"8.png\">/gi, "Ш" );
+        trampInput.value = innerText;
+        this.innerHTML = "";
+        this.appendChild(trampInput);
+        trampInput.focus();
+        trampInput.select()
+		}.bind(el), false);
+	};
+	
+</script>
